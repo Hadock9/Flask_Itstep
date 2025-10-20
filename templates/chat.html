@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="uk">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Чат — Flask ItStep</title>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='css/style.css') }}"
+		/>
+	</head>
+	<body>
+		<header class="container">
+			<div class="flex justify-between items-center">
+				<a class="button brand" href="/">Flask ItStep</a>
+				<nav class="flex gap-16">
+					<a href="/" class="button">Головна</a>
+					<a href="/chat" class="button">Чат</a>
+				</nav>
+			</div>
+		</header>
+
+		<main class="container">
+			<div class="gpt-chat">
+				<div class="conversation">
+					<div class="msg assistant">
+						<div class="avatar assistant">AI</div>
+						<div class="bubble">Привіт! Я твій асистент. Чим допомогти сьогодні?</div>
+					</div>
+
+					<div class="msg user">
+						<div class="bubble">Поясни коротко, що таке Flexbox у CSS.</div>
+						<div class="avatar user">Я</div>
+					</div>
+
+					<div class="msg assistant">
+						<div class="avatar assistant">AI</div>
+						<div class="bubble">Flexbox — це модель розкладки, яка спрощує вирівнювання та розподіл простору серед елементів у контейнері, навіть якщо їхні розміри невідомі. Основні властивості: display:flex, flex-direction, justify-content, align-items, gap.</div>
+					</div>
+				</div>
+
+				<div class="composer">
+					<form class="row" action="#" method="post" onsubmit="return false;">
+						<input class="input-text" type="text" placeholder="Надрукуйте повідомлення..." />
+						<button class="send-btn" type="submit">Надіслати</button>
+					</form>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

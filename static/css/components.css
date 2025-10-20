@@ -302,8 +302,12 @@
 	gap: 12px;
 	align-items: flex-start;
 }
-.msg.assistant { justify-content: flex-start; }
-.msg.user { justify-content: flex-end; }
+.msg.assistant {
+	justify-content: flex-start;
+}
+.msg.user {
+	justify-content: flex-end;
+}
 
 .avatar {
 	width: 36px;
@@ -315,8 +319,14 @@
 	font-size: 16px;
 	flex-shrink: 0;
 }
-.avatar.assistant { background: #111827; color: #ffffff; }
-.avatar.user { background: #2563eb; color: #ffffff; }
+.avatar.assistant {
+	background: #111827;
+	color: #ffffff;
+}
+.avatar.user {
+	background: #2563eb;
+	color: #ffffff;
+}
 
 .bubble {
 	max-width: 75%;
@@ -343,7 +353,7 @@
 .composer {
 	position: sticky;
 	bottom: 0;
-	background: rgba(255,255,255,0.85);
+	background: rgba(255, 255, 255, 0.85);
 	backdrop-filter: blur(6px);
 	border-top: 1px solid #e5e7eb;
 	padding: 12px 0;
@@ -368,7 +378,7 @@
 
 .input-text:focus {
 	border-color: #2563eb;
-	box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .send-btn {
@@ -382,5 +392,11 @@
 	transition: transform 0.15s ease, filter 0.15s ease;
 }
 
-.send-btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
-.send-btn:active { transform: translateY(0); filter: brightness(0.95); }
+.send-btn:hover {
+	transform: translateY(-1px);
+	filter: brightness(1.05);
+}
+.send-btn:active {
+	transform: translateY(0);
+	filter: brightness(0.95);
+}

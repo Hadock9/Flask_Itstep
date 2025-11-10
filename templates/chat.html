@@ -1,62 +1,51 @@
-<!DOCTYPE html>
-<html lang="uk">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Чат — Flask ItStep</title>
-		<link
-			rel="stylesheet"
-			href="{{ url_for('static', filename='css/style.css') }}"
-		/>
-	</head>
-	<body>
-		<header class="container">
-			<div class="flex justify-between items-center">
-				<a class="button brand" href="/">Flask ItStep</a>
-				<nav class="flex gap-16">
-					<a href="/" class="button">Головна</a>
-					<a href="/chat" class="button">Чат</a>
-				</nav>
-			</div>
-		</header>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+    
+    <div class="main">
+        
+        <div class="nav">
+            <div  class="logo">
+                <a class="nav_a" href="/">Flask</a>
+            </div>
+            <div class="nav_item">
+                <a class="nav_a" href="/">Головна</a>
+                <a class="nav_a nav_a_last" href="/chat">Чат</a>
+            </div>
+        </div>
 
-		<main class="container">
-			<div class="gpt-chat">
-				<div class="conversation">
-					<div class="msg assistant">
-						<div class="avatar assistant">AI</div>
-						<div class="bubble">
-							Привіт! Я твій асистент. Чим допомогти сьогодні?
-						</div>
-					</div>
+        <div class="chat_main">
+            <div class="chat_answer">
+                <img class="chat_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg6SlMzO5dPH9AThA886HVcTeMhMhc6XFA_Q&s" alt="ai картинка">
+                <p class="chat_text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi laboriosam quos animi saepe molestiae modi consectetur nam quam, illum deserunt? Nostrum et corporis fu 
+                </p>
+            </div>
+            <div class="user_question">
+                <div class="msg_user">
+                    
+                    <p class="chat_text">
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima explicabo ipsam corporis ratione voluptas dolorum veniam illo, esse eum quasi dolor, qui cumque aspernatur perspiciati 
+                    </p>
+                    <img class="chat_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg6SlMzO5dPH9AThA886HVcTeMhMhc6XFA_Q&s" alt="ai картинка">
+                </div>
+               
+             
+            </div>
+            <div class="chat_answer">
+                <img class="chat_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg6SlMzO5dPH9AThA886HVcTeMhMhc6XFA_Q&s" alt="ai картинка">
+                <p class="chat_text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi laboriosam quos animi saepe molestiae modi consectetur nam quam, illum deserunt? Nostrum et corporis fu 
+                </p>
+            </div>
+        </div>
 
-					<div class="msg user">
-						<div class="bubble">Поясни коротко, що таке Flexbox у CSS.</div>
-						<div class="avatar user">Я</div>
-					</div>
+    </div>
 
-					<div class="msg assistant">
-						<div class="avatar assistant">AI</div>
-						<div class="bubble">
-							Flexbox — це модель розкладки, яка спрощує вирівнювання та
-							розподіл простору серед елементів у контейнері, навіть якщо їхні
-							розміри невідомі. Основні властивості: display:flex,
-							flex-direction, justify-content, align-items, gap.
-						</div>
-					</div>
-				</div>
-
-				<div class="composer">
-					<form class="row" action="#" method="post" onsubmit="return false;">
-						<input
-							class="input-text"
-							type="text"
-							placeholder="Надрукуйте повідомлення..."
-						/>
-						<button class="send-btn" type="submit">Надіслати</button>
-					</form>
-				</div>
-			</div>
-		</main>
-	</body>
+</body>
 </html>

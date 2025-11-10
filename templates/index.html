@@ -1,41 +1,30 @@
-<!DOCTYPE html>
-<html lang="uk">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Flask ItStep</title>
-		<link
-			rel="stylesheet"
-			href="{{ url_for('static', filename='css/style.css') }}"
-		/>
-	</head>
-	<body>
-		<header class="container">
-			<div class="flex justify-between items-center">
-				<a class="button brand" href="/">Flask ItStep</a>
-				<nav class="flex gap-16">
-					<a href="/" class="button">Головна</a>
-					<a href="/chat" class="button">Чат</a>
-				</nav>
-			</div>
-		</header>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+    
+    <div class="main">
+        
+        <div class="nav">
+            <div  class="logo">
+                <a class="nav_a" href="/">Flask</a>
+            </div>
+            <div class="nav_item">
+                <a class="nav_a" href="/">Головна</a>
+                <a class="nav_a nav_a_last" href="/chat">Чат</a>
+            </div>
+        </div>
 
-		<main class="container center">
-			<div class="card">
-				<h2>Стартова сторінка</h2>
-				<p class="text-muted">Це базовий шаблон Flask з підключеним стилем.</p>
-				<a class="button" href="/chat">Відкрити чат</a>
-			</div>
+        <div >
 
-			<div class="card" style="margin-top: 24px">
-				<h2>Flex демо</h2>
-				<p class="text-muted">Ряд (row) з проміжком</p>
-				<div class="demo flex gap-16 justify-center">
-					<div class="demo-item">1</div>
-					<div class="demo-item">2</div>
-					<div class="demo-item">3</div>
-				</div>
-			</div>
-		</main>
-	</body>
+
+        </div>
+
+    </div>
+
+</body>
 </html>

@@ -1,51 +1,104 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
-</head>
-<body>
-    
-    <div class="main">
-        
-        <div class="nav">
-            <div  class="logo">
-                <a class="nav_a" href="/">Flask</a>
-            </div>
-            <div class="nav_item">
-                <a class="nav_a" href="/">Головна</a>
-                <a class="nav_a nav_a_last" href="/chat">Чат</a>
-            </div>
-        </div>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Chat</title>
+		<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
+	</head>
+	<body>
+		<div class="main">
+			<div class="nav">
+				<div class="logo">
+					<a class="nav_a" href="/">Flask</a>
+				</div>
+				<div class="nav_item">
+					<a class="nav_a" href="/">Головна</a>
+					<a class="nav_a nav_a_last" href="/chat">Чат</a>
+				</div>
+			</div>
 
-        <div class="chat_main">
-            <div class="chat_answer">
-                <img class="chat_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg6SlMzO5dPH9AThA886HVcTeMhMhc6XFA_Q&s" alt="ai картинка">
-                <p class="chat_text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi laboriosam quos animi saepe molestiae modi consectetur nam quam, illum deserunt? Nostrum et corporis fu 
-                </p>
-            </div>
-            <div class="user_question">
+			<div class="chat_main" id="chatContainer">
+				<!-- Повідомлення будуть додаватися динамічно -->
+			</div>
+
+			<div class="chat_input_container">
+				<form id="chatForm" class="chat_form">
+					<input
+						type="text"
+						id="userMessage"
+						class="chat_input"
+						placeholder="Введіть ваше повідомлення..."
+						autocomplete="off"
+					/>
+					<button type="submit" class="chat_button">Відправити</button>
+				</form>
+			</div>
+		</div>
+
+		<script>
+			const chatForm = document.getElementById('chatForm')
+			const userMessageInput = document.getElementById('userMessage')
+			const chatContainer = document.getElementById('chatContainer')
+
+			// Функція для додавання повідомлення користувача
+			function addUserMessage(message) {
+				const messageDiv = document.createElement('div')
+				messageDiv.className = 'user_question'
+				messageDiv.innerHTML = `
                 <div class="msg_user">
-                    
-                    <p class="chat_text">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima explicabo ipsam corporis ratione voluptas dolorum veniam illo, esse eum quasi dolor, qui cumque aspernatur perspiciati 
-                    </p>
-                    <img class="chat_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg6SlMzO5dPH9AThA886HVcTeMhMhc6XFA_Q&s" alt="ai картинка">
+                    <p class="chat_text">${message}</p>
+                    <img class="chat_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg6SlMzO5dPH9AThA886HVcTeMhMhc6XFA_Q&s" alt="user">
                 </div>
-               
-             
-            </div>
-            <div class="chat_answer">
-                <img class="chat_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg6SlMzO5dPH9AThA886HVcTeMhMhc6XFA_Q&s" alt="ai картинка">
-                <p class="chat_text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi laboriosam quos animi saepe molestiae modi consectetur nam quam, illum deserunt? Nostrum et corporis fu 
-                </p>
-            </div>
-        </div>
+            `
+				chatContainer.appendChild(messageDiv)
+				chatContainer.scrollTop = chatContainer.scrollHeight
+			}
 
-    </div>
+			// Функція для додавання відповіді AI
+			function addAIMessage(message) {
+				const messageDiv = document.createElement('div')
+				messageDiv.className = 'chat_answer'
+				messageDiv.innerHTML = `
+                <img class="chat_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg6SlMzO5dPH9AThA886HVcTeMhMhc6XFA_Q&s" alt="ai">
+                <p class="chat_text">${message}</p>
+            `
+				chatContainer.appendChild(messageDiv)
+				chatContainer.scrollTop = chatContainer.scrollHeight
+			}
 
-</body>
+			// Обробка відправки форми
+			chatForm.addEventListener('submit', async e => {
+				e.preventDefault()
+
+				const message = userMessageInput.value.trim()
+				if (!message) return
+
+				// Додаємо повідомлення користувача
+				addUserMessage(message)
+				userMessageInput.value = ''
+
+				// Відправляємо запит на сервер
+				try {
+					const response = await fetch('/api/chat', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({ message: message }),
+					})
+
+					const data = await response.json()
+
+					if (response.ok) {
+						addAIMessage(data.message)
+					} else {
+						addAIMessage('Помилка: ' + (data.error || 'Щось пішло не так'))
+					}
+				} catch (error) {
+					addAIMessage("Помилка з'єднання з сервером")
+					console.error('Error:', error)
+				}
+			})
+		</script>
+	</body>
 </html>

@@ -1,5 +1,10 @@
 from flask import Flask, render_template, request, jsonify
+import os
+from dotenv import load_dotenv
+from groq import Groq
 
+# Завантаження змінних середовища з .env файлу
+load_dotenv()
 app = Flask(__name__)
 
 @app.route("/")
@@ -12,20 +17,23 @@ def chat():
 
 @app.route("/api/chat", methods=["POST"])
 def chat_api():
-    """API endpoint для обробки повідомлень чату"""
-    data = request.get_json()
-    user_message = data.get('message', '')
-    
+    user_message = request.get_json().get('message', '')
     if not user_message:
-        return jsonify({'error': 'Повідомлення не може бути порожнім'}), 400
+        return jsonify({'error': 'Повідомлення порожнє'}), 400
     
-    # Тут буде інтеграція з GPT
-    # Поки що повертаємо тестову відповідь
-    response = {
-        'message': f'Ви написали: {user_message}'
-    }
-    
-    return jsonify(response)
+    client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+    completion = client.chat.completions.create(
+        model="openai/gpt-oss-20b",
+        messages=[
+            {"role": "system", "content": "Ти корисний асистент. Відповідай українською мовою."},
+            {"role": "user", "content": user_message},
+        ],
+        temperature=0.7,
+        max_tokens=500,
+        reasoning_effort="medium",
+       
+    )
+    return jsonify({'message': completion.choices[0].message.content.strip()})
 
 if __name__ == '__main__':
     app.run(debug=True)
